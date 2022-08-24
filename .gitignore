@@ -18,3 +18,5 @@ tests/auth_test_data/sheets.googleapis.com-python.json
 .DS_Store
 .python-version
 .coverage
+
+db.sqlite3
