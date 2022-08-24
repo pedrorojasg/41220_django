@@ -1,0 +1,20 @@
+# Python
+*.pyc
+build/
+dist/
+venv/
+.cache/
+.pytest_cache/
+pygsheets.egg-info/
+.pytest_cache/
+
+# Tests
+test/usages
+test/manual_test1.py
+tests/auth_test_data/sheets.googleapis.com-python.json
+
+# Other
+.idea/
+.DS_Store
+.python-version
+.coverage
