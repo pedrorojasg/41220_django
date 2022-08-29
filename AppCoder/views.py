@@ -10,7 +10,6 @@ def curso(request):
       curso.save()
       documentoDeTexto = f"--->Curso: {curso.nombre}   Camada: {curso.camada}"
 
-
       return HttpResponse(documentoDeTexto)
 
 
