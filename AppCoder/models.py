@@ -13,6 +13,9 @@ class Estudiante(models.Model):
     apellido = models.CharField(max_length=128)
     email = models.EmailField()
 
+    def __str__(self):
+        return f'{self.apellido}, {self.nombre}'
+
 
 class Profesor(models.Model):
     nombre = models.CharField(max_length=128)
@@ -24,6 +27,9 @@ class Profesor(models.Model):
 class Curso(models.Model):
     nombre = models.CharField(max_length=128)
     comision = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.nombre} - {self.comision}'
 
 
 class Entregable(models.Model):
