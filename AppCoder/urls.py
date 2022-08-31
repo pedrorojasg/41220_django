@@ -9,4 +9,6 @@ urlpatterns = [
     path('estudiantes/', views.estudiantes, name="estudiantes"),
     path('entregables/', views.entregables, name="entregables"),
     path('crear-curso/', views.curso_formulario, name="curso_formulario"),
+    path('busqueda-curso-form/', views.busqueda_cursos, name="busqueda_curso_form"),
+    path('busqueda-curso/', views.buscar, name="busqueda_curso"),
 ]

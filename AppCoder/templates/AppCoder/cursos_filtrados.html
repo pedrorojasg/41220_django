@@ -2,14 +2,10 @@
 
 {% block contenido_base %}
 
-<h1>Cursos</h1>
-<a href="{% url 'curso_formulario' %}">Crear curso!</a>
-<br>
-<a href="{% url 'busqueda_curso_form' %}">Buscar Cursos</a>
-
 <br><br>
-<h3>Todos los cursos:</h3>
+<h3>Cursos Filtrados:</h3>
 
+{% if cursos %}
 <table border="2">
   <tr>
     <td>
@@ -26,5 +22,9 @@
   </tr>
   {% endfor %}
 </table>
+{% else %}
+<h4>No hay cursos con esa busqueda</h4>
+{% endif %}
+
 
 {% endblock contenido_base %}

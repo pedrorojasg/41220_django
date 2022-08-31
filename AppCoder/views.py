@@ -21,8 +21,8 @@ def inicio(request):
 
 
 def cursos(request):
-
-      return render(request, "AppCoder/cursos.html")
+      cursos = Curso.objects.all()
+      return render(request, "AppCoder/cursos.html", {'cursos': cursos})
 
 
 def profesores(request):
@@ -63,3 +63,16 @@ def curso_formulario(request):
       else:  # GET
             formulario= CursoFormulario()  # Formulario vacio para construir el html
       return render(request, "AppCoder/form_curso.html", {"formulario": formulario})
+
+
+def busqueda_cursos(request):
+      return render(request, "AppCoder/form_busqueda_curso.html")
+
+
+def buscar(request):
+      if request.GET["comision"]:
+            comision = request.GET["comision"]
+            cursos = Curso.objects.filter(comision__icontains=comision)
+            return render(request, "AppCoder/cursos.html", {'cursos': cursos})
+      else:
+            return render(request, "AppCoder/cursos.html", {'cursos': []})

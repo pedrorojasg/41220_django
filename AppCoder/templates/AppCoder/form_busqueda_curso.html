@@ -1,0 +1,11 @@
+{% extends "AppCoder/plantilla_base.html" %}
+
+{% block contenido_base %}
+<form action="{% url 'busqueda_curso' %}" method="GET">
+  {% csrf_token %}
+  <span>Comision:
+    <input type="integer" name="comision">
+  </span>
+  <input type="submit" value="Buscar" />
+</form>
+{% endblock contenido_base %}
