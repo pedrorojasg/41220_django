@@ -3,14 +3,7 @@
 {% block contenido_base %}
 <form method="post">
   {% csrf_token %}
-  <p>
-    Nombre:  
-    <input type="text" name="nombre">
-  </p>
-  <p>
-    Comision:  
-    <input type="text" name="comision">
-  </p>
+  {{ formulario.as_p }}
   <input type="submit" value="Enviar" />
 </form>
 {% endblock contenido_base %}
