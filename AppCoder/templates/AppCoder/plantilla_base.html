@@ -18,21 +18,25 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'AppCoder/css/styles.css' %}" rel="stylesheet" />
 
+        {% block style_block %}
+        {% endblock style_block %}
+
     </head>
 
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                <a class="navbar-brand" href="{% url 'inicio' %}">INICIO</a>
                 <a class="navbar-brand" href="{% url 'estudiantes' %}">Estudiantes</a>
                 <a class="navbar-brand" href="{% url 'cursos' %}">Cursos</a>
                 <a class="navbar-brand" href="{% url 'profesores' %}">Profesores</a>
-                <a class="navbar-brand" href=""{% url 'entregables' %}">Mis Entregables</a>
+                <a class="navbar-brand" href="{% url 'entregables' %}">Mis Entregables</a>
                 <a class="btn btn-primary" href="#signup">INICIAR</a>
             </div>
         </nav>
 
-        <section style="margin:80px;">
+        <section style="padding:80px;">
             {% block contenido_base %}
             {% endblock contenido_base %}
         </section>
