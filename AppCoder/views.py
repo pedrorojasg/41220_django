@@ -1,8 +1,8 @@
 from typing import Dict
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 
-from AppCoder.models import Curso
+from AppCoder.models import Curso, Profesor
 from AppCoder.forms import CursoFormulario
 
 
@@ -67,3 +67,9 @@ def buscar_curso(request):
 
 
 # Vistas de Profesores
+
+def profesores(request):
+      profesores = Profesor.objects.all() #trae todos los profesores
+      contexto= {"profesores":profesores} 
+
+      return render(request, "AppCoder/profesores.html",contexto)
