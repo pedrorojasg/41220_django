@@ -1,7 +1,6 @@
 from typing import Dict
 
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from AppCoder.models import Curso
 from AppCoder.forms import CursoFormulario
@@ -10,16 +9,6 @@ from AppCoder.forms import CursoFormulario
 def inicio(request):
 
       return render(request, "AppCoder/inicio.html")
-
-
-def cursos(request):
-      cursos = Curso.objects.all()
-      return render(request, "AppCoder/cursos.html", {'cursos': cursos})
-
-
-def profesores(request):
-
-      return render(request, "AppCoder/profesores.html")
 
 
 def estudiantes(request):
@@ -43,6 +32,13 @@ def entregables(request):
 #             return render(request, "AppCoder/form_curso.html")
 
 
+# Vistas de Cursos
+
+def cursos(request):
+      cursos = Curso.objects.all()
+      return render(request, "AppCoder/cursos.html", {'cursos': cursos})
+
+
 def curso_formulario(request):
       if request.method == 'POST':
             formulario= CursoFormulario(request.POST)
@@ -61,10 +57,13 @@ def busqueda_cursos(request):
       return render(request, "AppCoder/form_busqueda_curso.html")
 
 
-def buscar(request):
+def buscar_curso(request):
       if request.GET["comision"]:
             comision = request.GET["comision"]
             cursos = Curso.objects.filter(comision__icontains=comision)
             return render(request, "AppCoder/cursos.html", {'cursos': cursos})
       else:
             return render(request, "AppCoder/cursos.html", {'cursos': []})
+
+
+# Vistas de Profesores
