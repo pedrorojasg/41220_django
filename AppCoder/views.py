@@ -8,17 +8,17 @@ from AppCoder.forms import CursoFormulario
 
 def inicio(request):
 
-      return render(request, "AppCoder/inicio.html")
+    return render(request, "AppCoder/inicio.html")
 
 
 def estudiantes(request):
 
-      return render(request, "AppCoder/estudiantes.html")
+    return render(request, "AppCoder/estudiantes.html")
 
 
 def entregables(request):
 
-      return render(request, "AppCoder/entregables.html")
+    return render(request, "AppCoder/entregables.html")
 
 
 # Formulario a mano
@@ -35,41 +35,41 @@ def entregables(request):
 # Vistas de Cursos
 
 def cursos(request):
-      cursos = Curso.objects.all()
-      return render(request, "AppCoder/cursos.html", {'cursos': cursos})
+    cursos = Curso.objects.all()
+    return render(request, "AppCoder/cursos.html", {'cursos': cursos})
 
 
 def curso_formulario(request):
-      if request.method == 'POST':
-            formulario= CursoFormulario(request.POST)
+    if request.method == 'POST':
+        formulario = CursoFormulario(request.POST)
 
-            if formulario.is_valid():
-                  data = formulario.cleaned_data
-                  curso = Curso(nombre=data['nombre'], comision=data['comision'])
-                  curso.save()
-                  return render(request, "AppCoder/inicio.html", {"exitoso": True})
-      else:  # GET
-            formulario= CursoFormulario()  # Formulario vacio para construir el html
-      return render(request, "AppCoder/form_curso.html", {"formulario": formulario})
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            curso = Curso(nombre=data['nombre'], comision=data['comision'])
+            curso.save()
+            return render(request, "AppCoder/inicio.html", {"exitoso": True})
+    else:  # GET
+        formulario = CursoFormulario()  # Formulario vacio para construir el html
+    return render(request, "AppCoder/form_curso.html", {"formulario": formulario})
 
 
 def busqueda_cursos(request):
-      return render(request, "AppCoder/form_busqueda_curso.html")
+    return render(request, "AppCoder/form_busqueda_curso.html")
 
 
 def buscar_curso(request):
-      if request.GET["comision"]:
-            comision = request.GET["comision"]
-            cursos = Curso.objects.filter(comision__icontains=comision)
-            return render(request, "AppCoder/cursos.html", {'cursos': cursos})
-      else:
-            return render(request, "AppCoder/cursos.html", {'cursos': []})
+    if request.GET["comision"]:
+        comision = request.GET["comision"]
+        cursos = Curso.objects.filter(comision__icontains=comision)
+        return render(request, "AppCoder/cursos.html", {'cursos': cursos})
+    else:
+        return render(request, "AppCoder/cursos.html", {'cursos': []})
 
 
 # Vistas de Profesores
 
 def profesores(request):
-      profesores = Profesor.objects.all() #trae todos los profesores
-      contexto= {"profesores":profesores} 
+    profesores = Profesor.objects.all()  # trae todos los profesores
+    contexto = {"profesores": profesores}
 
-      return render(request, "AppCoder/profesores.html",contexto)
+    return render(request, "AppCoder/profesores.html", contexto)
