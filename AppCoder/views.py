@@ -1,19 +1,15 @@
 from typing import Dict
 
 from django.shortcuts import render, redirect, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from AppCoder.models import Curso, Profesor
+from AppCoder.models import Curso, Estudiante, Profesor
 from AppCoder.forms import CursoFormulario, ProfesorFormulario
 
 
 def inicio(request):
 
     return render(request, "AppCoder/inicio.html")
-
-
-def estudiantes(request):
-
-    return render(request, "AppCoder/estudiantes.html")
 
 
 def entregables(request):
@@ -128,3 +124,22 @@ def editar_profesor(request, id):
         }
         formulario = ProfesorFormulario(initial=inicial)
     return render(request, "AppCoder/form_profesor.html", {"formulario": formulario})
+
+
+# Vistas de Estudiantes
+
+class EstudianteListView(ListView):
+    model = Estudiante
+    template_name = 'AppCoder/estudiantes.html'
+
+
+class EstudianteCreateView(CreateView):
+    pass
+
+
+class EstudianteUpdateView(UpdateView):
+    pass
+
+
+class EstudianteDeleteView(DeleteView):
+    pass

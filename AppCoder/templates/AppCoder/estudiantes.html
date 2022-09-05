@@ -1,7 +1,49 @@
 {% extends "AppCoder/plantilla_base.html" %}
 
+{% block style_block %}
+<style>
+  table.coder-table {
+    border:3px solid;
+  }
+  th,
+  td {
+    border:1px solid;
+    padding:5px 10px;
+  }
+  .eliminado {
+    background-color: red;
+  }
+</style>
+{% endblock style_block %}
+
 {% block contenido_base %}
 
+{% if borrado %}
+{% comment %} <div class="eliminado">Fue borrado exitosamente el profesor de ID: {{ borrado }}</div> {% endcomment %}
+{% endif %}
+
 <h1>Estudiantes</h1>
+{% comment %} <a href="{% url 'crear_profesor' %}">Crear profesor!</a> {% endcomment %}
+
+<br><br>
+
+<table class="coder-table">
+  <tbody>
+    <tr>
+      <th>
+        <strong>Apellido</strong>
+      </th>
+      <th>
+        <strong>Nombre</strong>
+      </th>
+    </tr>
+    {% for estudiante in object_list %}
+    <tr>
+      <td>{{estudiante.apellido}}</td>
+      <td>{{estudiante.nombre}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock contenido_base %}
