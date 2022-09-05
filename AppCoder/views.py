@@ -99,3 +99,32 @@ def crear_profesor(request):
     else:  # GET
         formulario = ProfesorFormulario()  # Formulario vacio para construir el html
     return render(request, "AppCoder/form_profesor.html", {"formulario": formulario})
+
+
+def editar_profesor(request, id):
+    # Recibe param profesor id, con el que obtenemos el profesor
+    profesor = Profesor.objects.get(id=id)
+
+    if request.method == 'POST':
+        formulario = ProfesorFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+
+            profesor.nombre = data['nombre']
+            profesor.apellido = data['apellido']
+            profesor.email = data['email']
+            profesor.profesion = data['profesion']
+
+            profesor.save()
+
+            return redirect(reverse('profesores'))
+    else:  # GET
+        inicial = {
+            'nombre': profesor.nombre,
+            'apellido': profesor.apellido,
+            'email': profesor.email,
+            'profesion': profesor.profesion,
+        }
+        formulario = ProfesorFormulario(initial=inicial)
+    return render(request, "AppCoder/form_profesor.html", {"formulario": formulario})

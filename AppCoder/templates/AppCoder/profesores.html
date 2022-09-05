@@ -43,7 +43,7 @@
     <tr>
       <td>{{profesor.apellido}}</td>
       <td>{{profesor.nombre}}</td>
-      <td></td>
+      <td><a href="{% url 'editar_profesor' profesor.id %}">Editar</a></td>
       <td><a href="{% url 'eliminar_profesor' profesor.id %}">Eliminar</a></td>
     </tr>
     {% endfor %}
