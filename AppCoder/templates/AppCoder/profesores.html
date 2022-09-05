@@ -1,7 +1,42 @@
 {% extends "AppCoder/plantilla_base.html" %}
 
+{% block style_block %}
+<style>
+  table.coder-table {
+    border:3px solid;
+  }
+  th,
+  td {
+    border:1px solid;
+    padding:5px 10px;
+  }
+</style>
+{% endblock style_block %}
+
 {% block contenido_base %}
 
 <h1>Profesores</h1>
+{% comment %} <a href="{% url 'profesores_formulario' %}">Crear profesores!</a> {% endcomment %}
+
+<br><br>
+
+<table class="coder-table">
+  <tbody>
+    <tr>
+      <th>
+        <strong>Apellido</strong>
+      </th>
+      <th>
+        <strong>Nombre</strong>
+      </th>
+    </tr>
+    {% for profesor in profesoress %}
+    <tr>
+      <td>{{profesor.apellido}}</td>
+      <td>{{profesor.nombre}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock contenido_base %}
