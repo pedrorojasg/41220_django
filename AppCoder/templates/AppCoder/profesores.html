@@ -10,13 +10,20 @@
     border:1px solid;
     padding:5px 10px;
   }
+  .eliminado {
+    background-color: red;
+  }
 </style>
 {% endblock style_block %}
 
 {% block contenido_base %}
 
+{% if borrado %}
+<div class="eliminado">Fue borrado exitosamente el profesor de ID: {{ borrado }}</div>
+{% endif %}
+
 <h1>Profesores</h1>
-{% comment %} <a href="{% url 'profesores_formulario' %}">Crear profesores!</a> {% endcomment %}
+<a href="{% url 'crear_profesor' %}">Crear profesor!</a>
 
 <br><br>
 
@@ -29,11 +36,15 @@
       <th>
         <strong>Nombre</strong>
       </th>
+      <th>Editar</th>
+      <th>Eliminar</th>
     </tr>
     {% for profesor in profesores %}
     <tr>
       <td>{{profesor.apellido}}</td>
       <td>{{profesor.nombre}}</td>
+      <td></td>
+      <td><a href="{% url 'eliminar_profesor' profesor.id %}">Eliminar</a></td>
     </tr>
     {% endfor %}
   </tbody>

@@ -13,4 +13,6 @@ urlpatterns = [
     path('busqueda-curso/', views.buscar_curso, name="busqueda_curso"),
     # URLs de Profesores
     path('profesores/', views.profesores, name="profesores"),
+    path('crear-profesor/', views.crear_profesor, name="crear_profesor"),
+    path('eliminar-profesor/<int:id>/', views.eliminar_profesor, name="eliminar_profesor"),
 ]

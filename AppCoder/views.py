@@ -3,7 +3,7 @@ from typing import Dict
 from django.shortcuts import render, redirect, reverse
 
 from AppCoder.models import Curso, Profesor
-from AppCoder.forms import CursoFormulario
+from AppCoder.forms import CursoFormulario, ProfesorFormulario
 
 
 def inicio(request):
@@ -71,5 +71,31 @@ def buscar_curso(request):
 def profesores(request):
     profesores = Profesor.objects.all()  # trae todos los profesores
     contexto = {"profesores": profesores}
+    borrado = request.GET.get('borrado', None)
+    contexto['borrado'] = borrado
 
     return render(request, "AppCoder/profesores.html", contexto)
+
+
+def eliminar_profesor(request, id):
+    profesor = Profesor.objects.get(id=id)
+    borrado_id = profesor.id
+    profesor.delete()
+    url_final = f"{reverse('profesores')}?borrado={borrado_id}"
+
+    return redirect(url_final)
+
+
+def crear_profesor(request):
+    if request.method == 'POST':
+        formulario = ProfesorFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            profesor = Profesor(**data)
+            # profesor = Profesor(apellido=data['apellido'], nombre=data['nombre'])
+            profesor.save()
+            return redirect(reverse('profesores'))
+    else:  # GET
+        formulario = ProfesorFormulario()  # Formulario vacio para construir el html
+    return render(request, "AppCoder/form_profesor.html", {"formulario": formulario})
