@@ -23,6 +23,9 @@ class Profesor(models.Model):
     email = models.EmailField()
     profesion = models.CharField(max_length=64)
 
+    def __str__(self):
+        return f'{self.apellido}, {self.nombre}'
+
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=128)
@@ -36,3 +39,6 @@ class Entregable(models.Model):
     nombre = models.CharField(max_length=128)
     entregado = models.BooleanField()
     fecha_de_entrega = models.DateField()
+
+    def __str__(self):
+        return f'Se ve como dice el metodo __str__'

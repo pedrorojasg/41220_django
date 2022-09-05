@@ -17,4 +17,7 @@ pip install -r requirements.txt
 ```
 python manage.py createsuperuser
 ```
-+ Acceder a 127.0.0.1/admin
++ Acceder con user y password via:
+```
+127.0.0.1:8000/admin
+```
