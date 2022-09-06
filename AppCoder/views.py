@@ -19,7 +19,7 @@ def entregables(request):
 
 
 # Formulario a mano
-# def curso_formulario(request):
+# def crear_curso(request):
 #       if request.method == 'POST':
 #             data_formulario: Dict = request.POST
 #             curso = Curso(nombre=data_formulario['nombre'], comision=data_formulario['comision'])
@@ -36,7 +36,7 @@ def cursos(request):
     return render(request, "AppCoder/cursos.html", {'cursos': cursos})
 
 
-def curso_formulario(request):
+def crear_curso(request):
     if request.method == 'POST':
         formulario = CursoFormulario(request.POST)
 

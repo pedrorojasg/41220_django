@@ -7,7 +7,7 @@ urlpatterns = [
     path('entregables/', views.entregables, name="entregables"),
     # URLs de Cursos
     path('cursos/', views.cursos, name="cursos"),
-    path('crear-curso/', views.curso_formulario, name="curso_formulario"),
+    path('crear-curso/', views.crear_curso, name="crear_curso"),
     path('busqueda-curso-form/', views.busqueda_cursos, name="busqueda_curso_form"),
     path('busqueda-curso/', views.buscar_curso, name="busqueda_curso"),
     # URLs de Profesores
