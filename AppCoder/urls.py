@@ -17,4 +17,6 @@ urlpatterns = [
     path('eliminar-profesor/<int:id>/', views.eliminar_profesor, name="eliminar_profesor"),
     # URLs de Estudiantes
     path('estudiantes/', views.EstudianteListView.as_view(), name="estudiantes"),
+    path('crear-estudiante/', views.EstudianteCreateView.as_view(), name="crear_estudiante"),
+    path('editar-estudiante/<int:pk>/', views.EstudianteUpdateView.as_view(), name="editar_estudiante"),
 ]

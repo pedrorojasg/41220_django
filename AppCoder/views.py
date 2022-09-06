@@ -1,6 +1,7 @@
 from typing import Dict
 
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from AppCoder.models import Curso, Estudiante, Profesor
@@ -134,11 +135,15 @@ class EstudianteListView(ListView):
 
 
 class EstudianteCreateView(CreateView):
-    pass
+    model = Estudiante
+    fields = ['nombre', 'apellido']
+    success_url = reverse_lazy('estudiantes')
 
 
 class EstudianteUpdateView(UpdateView):
-    pass
+    model = Estudiante
+    fields = ['nombre', 'apellido']
+    success_url = reverse_lazy('estudiantes')
 
 
 class EstudianteDeleteView(DeleteView):
