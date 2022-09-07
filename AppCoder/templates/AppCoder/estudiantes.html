@@ -37,12 +37,14 @@
         <strong>Nombre</strong>
       </th>
       <th>Editar</th>
+      <th>Eliminar</th>
     </tr>
     {% for estudiante in object_list %}
     <tr>
       <td>{{estudiante.apellido}}</td>
       <td>{{estudiante.nombre}}</td>
       <td><a href="{% url 'editar_estudiante' estudiante.id %}">Editar</a></td>
+      <td><a href="{% url 'eliminar_estudiante' estudiante.id %}">Eliminar</a></td>
     </tr>
     {% endfor %}
   </tbody>

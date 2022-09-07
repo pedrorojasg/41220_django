@@ -147,4 +147,5 @@ class EstudianteUpdateView(UpdateView):
 
 
 class EstudianteDeleteView(DeleteView):
-    pass
+    model = Estudiante
+    success_url = reverse_lazy('estudiantes')
