@@ -1,0 +1,9 @@
+{% extends "AppCoder/plantilla_base.html" %}
+
+{% block contenido_base %}
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Iniciar Sesión" />
+</form>
+{% endblock contenido_base %}

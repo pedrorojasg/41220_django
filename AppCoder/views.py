@@ -3,6 +3,7 @@ from typing import Dict
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LogoutView
 
 from AppCoder.models import Curso, Estudiante, Profesor
 from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
@@ -176,3 +177,29 @@ def register(request):
     if mensaje:
         context["mensaje"] = mensaje
     return render(request, "AppCoder/registro.html", context)
+
+
+def login_request(request):
+      if request.method == "POST":
+            form = AuthenticationForm(request, data = request.POST)
+
+            if form.is_valid():
+                usuario = form.cleaned_data.get('username')
+                contra = form.cleaned_data.get('password')
+                user = authenticate(username=usuario, password=contra)
+
+                if user:
+                    login(request=request, user=user)
+                    return render(request,"AppCoder/inicio.html", {"mensaje":f"Bienvenido {usuario}"})
+                else:
+                    return render(request,"AppCoder/inicio.html", {"mensaje":"Error, datos incorrectos"})
+            else:
+                return render(request,"AppCoder/inicio.html", {"mensaje":"Error, formulario erroneo"})
+
+      form = AuthenticationForm()
+      return render(request,"AppCoder/login.html", {'form':form} )
+
+
+class CustomLogoutView(LogoutView):
+    template_name = 'AppCoder/logout.html'
+
