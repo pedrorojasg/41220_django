@@ -15,11 +15,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+@login_required
 def inicio(request):
 
     return render(request, "AppCoder/inicio.html")
 
 
+@login_required
 def entregables(request):
 
     return render(request, "AppCoder/entregables.html")
@@ -38,11 +40,13 @@ def entregables(request):
 
 # Vistas de Cursos
 
+@login_required
 def cursos(request):
     cursos = Curso.objects.all()
     return render(request, "AppCoder/cursos.html", {'cursos': cursos})
 
 
+@login_required
 def crear_curso(request):
     if request.method == 'POST':
         formulario = CursoFormulario(request.POST)
@@ -57,10 +61,12 @@ def crear_curso(request):
     return render(request, "AppCoder/form_curso.html", {"formulario": formulario})
 
 
+@login_required
 def busqueda_cursos(request):
     return render(request, "AppCoder/form_busqueda_curso.html")
 
 
+@login_required
 def buscar_curso(request):
     if request.GET["comision"]:
         comision = request.GET["comision"]
@@ -72,6 +78,7 @@ def buscar_curso(request):
 
 # Vistas de Profesores
 
+@login_required
 def profesores(request):
     profesores = Profesor.objects.all()  # trae todos los profesores
     contexto = {"profesores": profesores}
@@ -81,6 +88,7 @@ def profesores(request):
     return render(request, "AppCoder/profesores.html", contexto)
 
 
+@login_required
 def eliminar_profesor(request, id):
     profesor = Profesor.objects.get(id=id)
     borrado_id = profesor.id
@@ -90,6 +98,7 @@ def eliminar_profesor(request, id):
     return redirect(url_final)
 
 
+@login_required
 def crear_profesor(request):
     if request.method == 'POST':
         formulario = ProfesorFormulario(request.POST)
@@ -105,6 +114,7 @@ def crear_profesor(request):
     return render(request, "AppCoder/form_profesor.html", {"formulario": formulario})
 
 
+@login_required
 def editar_profesor(request, id):
     # Recibe param profesor id, con el que obtenemos el profesor
     profesor = Profesor.objects.get(id=id)
@@ -136,24 +146,24 @@ def editar_profesor(request, id):
 
 # Vistas de Estudiantes
 
-class EstudianteListView(ListView):
+class EstudianteListView(LoginRequiredMixin, ListView):
     model = Estudiante
     template_name = 'AppCoder/estudiantes.html'
 
 
-class EstudianteCreateView(CreateView):
+class EstudianteCreateView(LoginRequiredMixin, CreateView):
     model = Estudiante
     fields = ['nombre', 'apellido']
     success_url = reverse_lazy('estudiantes')
 
 
-class EstudianteUpdateView(UpdateView):
+class EstudianteUpdateView(LoginRequiredMixin, UpdateView):
     model = Estudiante
     fields = ['nombre', 'apellido']
     success_url = reverse_lazy('estudiantes')
 
 
-class EstudianteDeleteView(DeleteView):
+class EstudianteDeleteView(LoginRequiredMixin, DeleteView):
     model = Estudiante
     success_url = reverse_lazy('estudiantes')
 
