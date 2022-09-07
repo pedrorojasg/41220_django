@@ -20,4 +20,6 @@ urlpatterns = [
     path('crear-estudiante/', views.EstudianteCreateView.as_view(), name="crear_estudiante"),
     path('editar-estudiante/<int:pk>/', views.EstudianteUpdateView.as_view(), name="editar_estudiante"),
     path('eliminar-estudiante/<int:pk>/', views.EstudianteDeleteView.as_view(), name="eliminar_estudiante"),
+    # URLS Usuario y sesión
+    path('register/', views.register, name = 'register'),
 ]

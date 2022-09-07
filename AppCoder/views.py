@@ -5,7 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from AppCoder.models import Curso, Estudiante, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
+
+#Para el login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def inicio(request):
@@ -149,3 +155,24 @@ class EstudianteUpdateView(UpdateView):
 class EstudianteDeleteView(DeleteView):
     model = Estudiante
     success_url = reverse_lazy('estudiantes')
+
+
+# Views de ususarios, registro, login o logout
+
+def register(request):
+    mensaje = ''
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return render(request, "AppCoder/inicio.html", {"mensaje": "Usuario Creado :)"})
+        else:
+            mensaje = 'Cometiste un error en el registro'
+    formulario = UserRegisterForm()  # Formulario vacio para construir el html
+    context = {
+        "form": formulario
+    }
+    if mensaje:
+        context["mensaje"] = mensaje
+    return render(request, "AppCoder/registro.html", context)

@@ -32,11 +32,14 @@
                 <a class="navbar-brand" href="{% url 'cursos' %}">Cursos</a>
                 <a class="navbar-brand" href="{% url 'profesores' %}">Profesores</a>
                 <a class="navbar-brand" href="{% url 'entregables' %}">Mis Entregables</a>
-                <a class="btn btn-primary" href="#signup">INICIAR</a>
+                <a class="btn btn-primary" href="{% url 'register' %}">REGISTRARSE</a>
             </div>
         </nav>
 
         <section style="padding:80px;">
+            {% if mensaje %}
+            <span style="background-color: blue;">{{mensaje}}</span>
+            {% endif %}
             {% block contenido_base %}
             {% endblock contenido_base %}
         </section>
