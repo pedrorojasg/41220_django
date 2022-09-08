@@ -182,11 +182,11 @@ def register(request):
             mensaje = 'Cometiste un error en el registro'
     formulario = UserRegisterForm()  # Formulario vacio para construir el html
     context = {
-        "form": formulario
+        'form': formulario,
+        'mensaje': mensaje
     }
-    if mensaje:
-        context["mensaje"] = mensaje
-    return render(request, "AppCoder/registro.html", context)
+
+    return render(request, "AppCoder/registro.html", context=context)
 
 
 def login_request(request):
