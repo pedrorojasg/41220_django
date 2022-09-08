@@ -190,24 +190,25 @@ def register(request):
 
 
 def login_request(request):
-      if request.method == "POST":
-            form = AuthenticationForm(request, data = request.POST)
-
-            if form.is_valid():
-                usuario = form.cleaned_data.get('username')
-                contra = form.cleaned_data.get('password')
-                user = authenticate(username=usuario, password=contra)
-
-                if user:
-                    login(request=request, user=user)
-                    return render(request,"AppCoder/inicio.html", {"mensaje":f"Bienvenido {usuario}"})
-                else:
-                    return render(request,"AppCoder/inicio.html", {"mensaje":"Error, datos incorrectos"})
+    next_url = request.GET.get('next')
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=contra)
+            if user:
+                login(request=request, user=user)
+                if next_url:
+                    return redirect(next_url)
+                return render(request, "AppCoder/inicio.html", {"mensaje":f"Bienvenido {usuario}"})
             else:
-                return render(request,"AppCoder/inicio.html", {"mensaje":"Error, formulario erroneo"})
+                return render(request,"AppCoder/inicio.html", {"mensaje":"Error, datos incorrectos"})
+        else:
+            return render(request,"AppCoder/inicio.html", {"mensaje":"Error, formulario erroneo"})
 
-      form = AuthenticationForm()
-      return render(request,"AppCoder/login.html", {'form':form} )
+    form = AuthenticationForm()
+    return render(request,"AppCoder/login.html", {'form':form} )
 
 
 class CustomLogoutView(LogoutView):
