@@ -8,9 +8,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 from AppCoder.models import Curso, Estudiante, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm, UserUpdateForm
 
 
 @login_required
@@ -157,6 +158,16 @@ class EstudianteDeleteView(LoginRequiredMixin, DeleteView):
 
 # Views de ususarios, registro, login o logout
 
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('inicio')
+    template_name = 'AppCoder/form_perfil.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
 def register(request):
     mensaje = ''
     if request.method == 'POST':
@@ -200,7 +211,7 @@ def login_request(request):
 
 class CustomLogoutView(LogoutView):
     template_name = 'AppCoder/logout.html'
-
+    next_page = reverse_lazy('inicio')
 
 
 # Formulario a mano
