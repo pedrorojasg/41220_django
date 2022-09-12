@@ -22,6 +22,7 @@ urlpatterns = [
     path('eliminar-estudiante/<int:pk>/', views.EstudianteDeleteView.as_view(), name="eliminar_estudiante"),
     # URLS Perfil
     path('editar-perfil/', views.ProfileUpdateView.as_view(), name="editar_perfil"),
+    path('agregar-avatar/', views.agregar_avatar, name="agregar_avatar"),
     # URLS Usuario y sesión
     path('login/', views.login_request, name = 'login'),
     path('register/', views.register, name = 'register'),

@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
 from AppCoder.models import Curso, Estudiante, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm, UserUpdateForm
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm, UserUpdateForm, AvatarFormulario
 
 
 @login_required
@@ -166,6 +166,22 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+@login_required
+def agregar_avatar(request):
+    if request.method == 'POST':
+
+        form = AvatarFormulario(request.POST, request.FILES) #aquí me llega toda la información del html
+
+        if form.is_valid:   #Si pasó la validación de Django
+            avatar = form.save()
+            avatar.user = request.user
+            avatar.save()
+            return redirect(reverse('inicio'))
+
+    form = AvatarFormulario() #Formulario vacio para construir el html
+    return render(request, "AppCoder/form_avatar.html", {"form":form})
 
 
 def register(request):
