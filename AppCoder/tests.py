@@ -5,7 +5,6 @@ from django.test import TestCase
 from AppCoder.models import Profesor
 
 class ProfesorTestCase(TestCase):
-    pass
 
     def test_creacion_profesores(self):
         # Test 1: Comprobar puedo crear un profesor con un nombre con letras random
