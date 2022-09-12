@@ -47,7 +47,7 @@ class Entregable(models.Model):
 
 class Avatar(models.Model):
     #vinvulo con el usuario
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     #Subcaperta avatares de media :) 
     imagen = models.ImageField(upload_to='avatares', null=True, blank = True)
 

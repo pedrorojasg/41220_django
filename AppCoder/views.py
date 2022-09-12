@@ -8,9 +8,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
-from AppCoder.models import Curso, Estudiante, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
+from AppCoder.models import Curso, Estudiante, Profesor, Avatar
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm, AvatarFormulario
 
 
 @login_required
@@ -156,6 +157,24 @@ class EstudianteDeleteView(LoginRequiredMixin, DeleteView):
 
 
 # Views de ususarios, registro, login o logout
+
+@login_required
+def agregarAvatar(request):
+    if request.method == 'POST':
+
+        form = AvatarFormulario(request.POST, request.FILES) #aquí mellega toda la información del html
+
+        if form.is_valid:   #Si pasó la validación de Django
+            user = User.objects.get(username=request.user)
+            avatar = form.save()
+            avatar.user = user
+            avatar.save()
+            # avatar = Avatar (user=u, imagen=form.cleaned_data['imagen']) 
+            return redirect(reverse('inicio'))
+
+    form = AvatarFormulario() #Formulario vacio para construir el html
+    return render(request, "AppCoder/form_avatar.html", {"form":form})
+
 
 def register(request):
     mensaje = ''
