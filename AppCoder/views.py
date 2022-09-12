@@ -4,15 +4,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LogoutView
-
-from AppCoder.models import Curso, Estudiante, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
-
-#Para el login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from AppCoder.models import Curso, Estudiante, Profesor
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegisterForm
 
 
 @login_required
