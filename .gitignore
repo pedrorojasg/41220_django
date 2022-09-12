@@ -20,4 +20,4 @@ tests/auth_test_data/sheets.googleapis.com-python.json
 .coverage
 
 # db.sqlite3
-media/**
+# media/**
